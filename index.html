@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LMS MTs Amtsilati - Berpikir Komputasional</title>
+    <title>LMS MTs Amtsilati - Computational Thinking</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -20,14 +20,14 @@
 
         /* --- STYLE HALAMAN PRIVAT --- */
         #private-view { display: none; }
-        .sidebar { background: linear-gradient(180deg, #4e73df 10%, #224abe 100%); min-height: 100vh; color: white; transition: 0.3s; }
-        .nav-link { color: rgba(255,255,255,0.8); border-radius: 10px; margin-bottom: 5px; }
-        .nav-link.active { background: rgba(255,255,255,0.2); color: white; }
+        .sidebar { background: linear-gradient(180deg, #4e73df 10%, #224abe 100%); min-height: 100vh; color: white; transition: 0.3s; position: sticky; top: 0; }
+        .nav-link { color: rgba(255,255,255,0.8); border-radius: 10px; margin-bottom: 5px; transition: 0.3s; }
+        .nav-link.active { background: rgba(255,255,255,0.2); color: white; font-weight: bold; }
         .card-custom { border: none; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; }
         .section-content { display: none; }
         .section-content.active { display: block; animation: fadeIn 0.5s; }
 
-        /* Quiz & Materi Styling */
+        /* Quiz & Element Styling */
         .question-item { background: #fff; border-radius: 15px; padding: 20px; margin-bottom: 20px; border-left: 5px solid #4e73df; }
         .options-list { list-style: none; padding-left: 0; }
         .option-label { display: block; border: 1px solid #ddd; padding: 10px; border-radius: 10px; cursor: pointer; margin-bottom: 8px; }
@@ -48,12 +48,12 @@
     <div class="container hero-section text-center">
         <div class="row align-items-center">
             <div class="col-lg-6 text-lg-start">
-                <h1 class="display-4 fw-bold text-dark mb-3">E-Learning <span class="text-primary">Komputasional</span></h1>
-                <p class="lead text-muted mb-5">Klik butang di bawah untuk memulakan sesi pembelajaran digital anda.</p>
-                <button class="btn btn-primary btn-start shadow-lg" onclick="prosesLogin()">Mula Petualangan <i class="bi bi-rocket-takeoff ms-2"></i></button>
+                <h1 class="display-4 fw-bold text-dark mb-3">E-Learning <span class="text-primary">Informatika</span></h1>
+                <p class="lead text-muted mb-5">Platform belajar digital untuk masa depan yang lebih cemerlang.</p>
+                <button class="btn btn-primary btn-start shadow-lg" onclick="prosesLogin()">Masuk Kelas <i class="bi bi-rocket-takeoff ms-2"></i></button>
             </div>
-            <div class="col-lg-6">
-                <img src="https://img.freepik.com/free-vector/online-learning-concept-illustration_114360-1115.jpg" class="img-fluid rounded-5 shadow-sm" alt="Ilustrasi">
+            <div class="col-lg-6 mt-5 mt-lg-0">
+                <img src="https://img.freepik.com/free-vector/online-learning-concept-illustration_114360-1115.jpg" class="img-fluid rounded-5 shadow-sm" alt="Belajar Digital">
             </div>
         </div>
     </div>
@@ -63,51 +63,72 @@
     <div class="container-fluid">
         <div class="row">
             <nav class="col-md-3 col-lg-2 d-md-block sidebar p-3 shadow">
-                <div class="text-center mb-4"><h5 class="fw-bold"><i class="bi bi-person-badge"></i> Panel Siswa</h5></div>
+                <div class="text-center mb-4"><h5 class="fw-bold"><i class="bi bi-mortarboard"></i> LMS SISWA</h5></div>
                 <hr>
                 <ul class="nav flex-column">
-                    <li class="nav-item"><a class="nav-link active" href="#" data-section="dash"><i class="bi bi-grid-1x2-fill me-2"></i> Beranda</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" data-section="materi"><i class="bi bi-book-half me-2"></i> Materi Saya</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#" data-section="dash"><i class="bi bi-house-door me-2"></i> Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-section="pengumuman"><i class="bi bi-megaphone me-2"></i> Pengumuman</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-section="materi"><i class="bi bi-journal-text me-2"></i> Materi Saya</a></li>
                     <li class="nav-item"><a class="nav-link" href="#" data-section="soal"><i class="bi bi-pencil-square me-2"></i> Menu Soal</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-section="tugas"><i class="bi bi-cloud-arrow-up me-2"></i> Tugas Proyek</a></li>
                     <li class="nav-item"><a class="nav-link" href="#" data-section="nilai"><i class="bi bi-award me-2"></i> Papan Skor</a></li>
                 </ul>
-                <div class="mt-5 p-2"><button class="btn btn-danger w-100 rounded-pill" onclick="prosesLogout()">Keluar</button></div>
+                <div class="mt-5 p-2"><button class="btn btn-danger w-100 rounded-pill" onclick="prosesLogout()">Keluar <i class="bi bi-box-arrow-right"></i></button></div>
             </nav>
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h2 class="fw-bold" id="pageTitle">Beranda</h2>
-                    <div class="badge bg-white text-dark p-2 border rounded-pill px-3">
+                    <div class="badge bg-white text-dark p-2 border rounded-pill px-3 shadow-sm">
                         <i class="bi bi-person-circle text-primary me-2"></i> <span id="studentName">Siswa</span>
                     </div>
                 </div>
 
                 <div id="dash" class="section-content active">
                     <div class="card border-0 bg-primary text-white p-4 rounded-4 shadow mb-4">
-                        <h4>Selamat Datang Kembali! 🚀</h4>
-                        <p class="mb-0">Pilih menu "Materi Saya" untuk mempelajari konsep Berpikir Komputasional melalui pautan yang disediakan.</p>
+                        <h4>Halo, Sobat Digital! 🚀</h4>
+                        <p class="mb-0">Cek menu <b>Pengumuman</b> untuk melihat tugas terbaru dari Bapak/Ibu Guru.</p>
                     </div>
-                    <div class="row g-4 text-center">
-                        <div class="col-md-6"><div class="card card-custom p-4"><h6>Skor Terakhir</h6><h3 id="stat-nilai">0</h3></div></div>
-                        <div class="col-md-6"><div class="card card-custom p-4"><h6>Latihan Selesai</h6><h3 id="stat-kuis">0</h3></div></div>
+                    
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-4"><div class="card card-custom p-3 text-center"><h6>Nilai Kuis</h6><h3 id="stat-nilai">0</h3></div></div>
+                        <div class="col-md-4"><div class="card card-custom p-3 text-center"><h6>Peringkat</h6><h3>#12</h3></div></div>
+                        <div class="col-md-4"><div class="card card-custom p-3 text-center"><h6>Tugas Masuk</h6><h3>1</h3></div></div>
+                    </div>
+
+                    <div class="card card-custom p-4 border-start border-warning border-5">
+                        <h6 class="fw-bold"><i class="bi bi-info-circle-fill text-warning me-2"></i> Info Terbaru</h6>
+                        <p class="mb-0 small">Jangan lupa selesaikan modul Dekomposisi sebelum hari Senin!</p>
+                    </div>
+                </div>
+
+                <div id="pengumuman" class="section-content">
+                    <div class="card card-custom p-4 mb-3">
+                        <span class="badge bg-info text-dark w-25 mb-2">17 Jan 2026</span>
+                        <h5 class="fw-bold">Persiapan Ujian Tengah Semester</h5>
+                        <p class="text-muted small">Diharapkan seluruh siswa kelas 7 untuk mempelajari kembali 4 pilar Berpikir Komputasional.</p>
+                    </div>
+                    <div class="card card-custom p-4 mb-3">
+                        <span class="badge bg-info text-dark w-25 mb-2">15 Jan 2026</span>
+                        <h5 class="fw-bold">Tugas Proyek Scratch</h5>
+                        <p class="text-muted small">Silakan unggah file .sb3 proyek game edukasi kalian di menu 'Tugas Proyek'.</p>
                     </div>
                 </div>
 
                 <div id="materi" class="section-content">
-                    <h5 class="fw-bold mb-4">Pilih Modul Pembelajaran:</h5>
                     <div class="row g-4">
                         <div class="col-md-6">
-                            <div class="card card-custom p-4 h-100 border-start border-primary border-5">
-                                <h3>🧩 Dekomposisi</h3>
-                                <p class="text-muted">Pelajari cara memecah masalah besar menjadi bagian yang lebih kecil dan mudah dikelola.</p>
-                                <a href="https://script.google.com/macros/s/AKfycbzquKCL4g5CpL6J_Hy4m2cGibHebo2aL27gmh1fn74FsfSMVxpyYUK1TLOcP-Suu2hjLw/exec" target="_blank" class="btn btn-primary rounded-pill mt-auto">Buka Materi 1 <i class="bi bi-box-arrow-up-right ms-1"></i></a>
+                            <div class="card card-custom p-4 border-bottom border-primary border-5">
+                                <h5>🧩 Materi 1: Dekomposisi</h5>
+                                <p class="small text-muted">Belajar cara memecah masalah besar menjadi bagian kecil.</p>
+                                <a href="https://script.google.com/macros/s/AKfycbzquKCL4g5CpL6J_Hy4m2cGibHebo2aL27gmh1fn74FsfSMVxpyYUK1TLOcP-Suu2hjLw/exec" target="_blank" class="btn btn-outline-primary btn-sm rounded-pill">Pelajari Materi <i class="bi bi-arrow-right-short"></i></a>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="card card-custom p-4 h-100 border-start border-success border-5">
-                                <h3>🎨 Pengenalan Pola</h3>
-                                <p class="text-muted">Temui kemiripan dalam masalah untuk mencari penyelesaian yang lebih pantas.</p>
-                                <a href="https://script.google.com/macros/s/AKfycbxfwjBzEbQdwxRFQbzzk-CVGHjqjIXBji0I5ZqsKTkvgUGDIOSYT_Y93e4CRA_OVI45pQ/exec" target="_blank" class="btn btn-success rounded-pill mt-auto">Buka Materi 2 <i class="bi bi-box-arrow-up-right ms-1"></i></a>
+                            <div class="card card-custom p-4 border-bottom border-success border-5">
+                                <h5>🎨 Materi 2: Pengenalan Pola</h5>
+                                <p class="small text-muted">Mencari kemiripan masalah untuk solusi lebih cepat.</p>
+                                <a href="https://script.google.com/macros/s/AKfycbxfwjBzEbQdwxRFQbzzk-CVGHjqjIXBji0I5ZqsKTkvgUGDIOSYT_Y93e4CRA_OVI45pQ/exec" target="_blank" class="btn btn-outline-success btn-sm rounded-pill">Pelajari Materi <i class="bi bi-arrow-right-short"></i></a>
                             </div>
                         </div>
                     </div>
@@ -116,23 +137,44 @@
                 <div id="soal" class="section-content">
                     <div id="quiz-list-view">
                         <div class="card card-custom p-5 text-center shadow-sm">
-                            <h4 class="fw-bold">Ujian Logika Komputasional</h4>
-                            <p>Selesaikan 10 soalan di bawah untuk melihat sejauh mana anda faham.</p>
-                            <button class="btn btn-primary btn-lg rounded-pill px-5" onclick="mulaiKuis()">Mula Menjawab</button>
+                            <h4 class="fw-bold text-primary">Kuis Dasar Computational Thinking</h4>
+                            <p>Uji pemahamanmu dengan menjawab 10 soal pilihan ganda.</p>
+                            <button class="btn btn-primary rounded-pill px-5 shadow" onclick="mulaiKuis()">Mulai Kuis Sekarang</button>
                         </div>
                     </div>
                     <div id="quiz-form-view" style="display: none;">
                         <div id="questions-container"></div>
                         <div class="text-center mt-4">
-                            <button class="btn btn-success btn-lg rounded-pill px-5 shadow mb-5" onclick="selesaiKuis()">Hantar Jawapan 🎉</button>
+                            <button class="btn btn-success btn-lg rounded-pill px-5 shadow mb-5" onclick="selesaiKuis()">Kirim Jawaban 🎉</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tugas" class="section-content">
+                    <div class="card card-custom p-4 shadow-sm">
+                        <h5 class="fw-bold mb-4"><i class="bi bi-cloud-upload text-primary me-2"></i> Pengumpulan Tugas File</h5>
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle">
+                                <thead class="table-light text-center small">
+                                    <tr><th>Nama Tugas</th><th>Tipe File</th><th>Status</th><th>Aksi</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Proyek Game Scratch (Bab 1)</td>
+                                        <td>.sb3 / .pdf</td>
+                                        <td><span class="badge bg-warning text-dark">Belum Dikirim</span></td>
+                                        <td class="text-center"><button class="btn btn-primary btn-sm rounded-pill" onclick="uploadTugas()">Kirim File <i class="bi bi-upload ms-1"></i></button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
 
                 <div id="nilai" class="section-content">
-                    <div class="card card-custom p-4">
-                        <h5 class="fw-bold text-center mb-4">Rekod Markah Anda</h5>
-                        <div id="score-history" class="text-center text-muted">Tiada rekod buat masa ini.</div>
+                    <div class="card card-custom p-4 text-center">
+                        <h5 class="fw-bold mb-4">Papan Nilai Saya</h5>
+                        <div id="score-history" class="text-muted">Kamu belum memiliki riwayat kuis.</div>
                     </div>
                 </div>
             </main>
@@ -142,33 +184,34 @@
 
 <script>
     const daftarSoal = [
-        { q: "Memecah masalah besar menjadi bahagian kecil disebut...", options: ["Algoritma", "Abstraksi", "Dekomposisi", "Pola"], a: 2 },
-        { q: "Langkah-langkah berurutan untuk menyelesaikan tugasan ialah...", options: ["Algoritma", "Pola", "Abstraksi", "Koding"], a: 0 },
-        { q: "Mencari kemiripan antara satu masalah dengan masalah lain disebut...", options: ["Dekomposisi", "Pengenalan Pola", "Abstraksi", "Logik"], a: 1 },
-        { q: "Mengabaikan detail yang tidak penting dan fokus pada inti masalah ialah...", options: ["Pola", "Dekomposisi", "Algoritma", "Abstraksi"], a: 3 },
-        { q: "Merapikan beg sekolah dengan menyusun buku mengikut jadual ialah contoh...", options: ["Abstraksi", "Dekomposisi", "Pola", "Sistem"], a: 1 },
-        { q: "Menulis langkah-langkah membuat air teh secara berurutan ialah...", options: ["Algoritma", "Abstraksi", "Pola", "Analisis"], a: 0 },
-        { q: "Mengelompokkan baju mengikut warna di dalam almari ialah...", options: ["Dekomposisi", "Abstraksi", "Pengenalan Pola", "Logik"], a: 2 },
-        { q: "Peta yang hanya menunjukkan jalan utama sahaja tanpa lukisan pokok ialah...", options: ["Algoritma", "Abstraksi", "Dekomposisi", "Sketsa"], a: 1 },
-        { q: "Tujuan utama Berpikir Komputasional ialah untuk...", options: ["Bermain game", "Membaiki komputer", "Memudahkan penyelesaian masalah", "Menghafal"], a: 2 },
-        { q: "Apabila masalah sudah dipecah, langkah seterusnya ialah...", options: ["Berhenti", "Mencari Pola", "Tidur", "Menangis"], a: 1 }
+        { q: "Apa arti dari Dekomposisi?", options: ["Menggabungkan masalah", "Memecah masalah menjadi bagian kecil", "Mencari kemiripan", "Membuat instruksi"], a: 1 },
+        { q: "Urutan langkah berurutan untuk tugas disebut...", options: ["Algoritma", "Abstraksi", "Pola", "Analisis"], a: 0 },
+        { q: "Mencari kesamaan dalam masalah disebut...", options: ["Dekomposisi", "Abstraksi", "Pengenalan Pola", "Koding"], a: 2 },
+        { q: "Fokus pada informasi penting dan mengabaikan detail kecil disebut...", options: ["Pola", "Abstraksi", "Algoritma", "Dekomposisi"], a: 1 },
+        { q: "Menentukan langkah memasak nasi adalah contoh...", options: ["Algoritma", "Pola", "Abstraksi", "Dekomposisi"], a: 0 },
+        { q: "Mengelompokkan sampah organik dan anorganik adalah...", options: ["Dekomposisi", "Pola", "Abstraksi", "Logika"], a: 1 },
+        { q: "Saat membereskan tas, kamu membagi jadi buku, alat tulis, dan bekal. Ini adalah...", options: ["Pola", "Dekomposisi", "Abstraksi", "Algoritma"], a: 1 },
+        { q: "Gambar denah rumah tanpa detail perabot adalah contoh...", options: ["Algoritma", "Dekomposisi", "Pola", "Abstraksi"], a: 3 },
+        { q: "Pilar CT yang membantu kita bekerja secara sistematis adalah...", options: ["Algoritma", "Pola", "Dekomposisi", "Semua Benar"], a: 3 },
+        { q: "Langkah terakhir setelah masalah dipecah dan dicari polanya adalah...", options: ["Menyerah", "Tidur", "Membuat Algoritma", "Melupakan"], a: 2 }
     ];
 
     function prosesLogin() {
         Swal.fire({
-            title: 'Login Siswa',
-            html: `<input type="text" id="swal-name" class="swal2-input" placeholder="Nama Anda">`,
-            confirmButtonText: 'Masuk',
-            preConfirm: () => {
-                const name = Swal.getPopup().querySelector('#swal-name').value;
-                if (!name) { Swal.showValidationMessage(`Sila masukkan nama`); }
-                return { name: name }
+            title: 'Login MTs Amtsilati',
+            input: 'text',
+            inputPlaceholder: 'Masukkan Nama Lengkap...',
+            confirmButtonText: 'Masuk Kelas',
+            preConfirm: (name) => {
+                if (!name) { Swal.showValidationMessage(`Tolong masukkan nama kamu`); }
+                return name;
             }
         }).then((result) => {
             if (result.isConfirmed) {
                 document.getElementById('public-view').style.display = 'none';
                 document.getElementById('private-view').style.display = 'block';
-                document.getElementById('studentName').innerText = result.value.name;
+                document.getElementById('studentName').innerText = result.value;
+                Swal.fire('Selamat Datang!', result.value, 'success');
             }
         });
     }
@@ -196,20 +239,41 @@
             if (res) { if (parseInt(res.value) === item.a) benar++; } else { dijawab = false; }
         });
 
-        if (!dijawab) { Swal.fire('Perhatian', 'Sila jawab semua soalan!', 'warning'); return; }
+        if (!dijawab) { Swal.fire('Peringatan', 'Selesaikan semua soal!', 'warning'); return; }
 
         const skor = (benar / 10) * 100;
         Swal.fire({
-            title: 'Syabas!',
-            html: `<h1 class="text-primary fw-bold">${skor}</h1><p>Markah anda telah direkodkan.</p>`,
+            title: 'Kuis Selesai!',
+            html: `<h1 class="text-primary fw-bold">${skor}</h1><p>Kamu menjawab benar ${benar} soal.</p>`,
             icon: 'success'
         }).then(() => {
             document.getElementById('quiz-form-view').style.display = 'none';
             document.getElementById('quiz-list-view').style.display = 'block';
             document.getElementById('stat-nilai').innerText = skor;
-            document.getElementById('stat-kuis').innerText = "1";
-            document.getElementById('score-history').innerHTML = `<div class="alert alert-primary">Ujian Dasar: Markah <b>${skor}</b></div>`;
+            document.getElementById('score-history').innerHTML = `<div class="alert alert-primary">Kuis Dasar CT: Skor <b>${skor}</b></div>`;
             showSection('dash');
+        });
+    }
+
+    function uploadTugas() {
+        Swal.fire({
+            title: 'Kirim Tugas Proyek',
+            input: 'file',
+            inputAttributes: { 'accept': '.sb3,.pdf', 'aria-label': 'Upload proyek kamu' },
+            showCancelButton: true,
+            confirmButtonText: 'Kirim Sekarang',
+            cancelButtonText: 'Batal'
+        }).then((file) => {
+            if (file.isConfirmed) {
+                Swal.fire({
+                    title: 'Mengunggah...',
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: () => { Swal.showLoading() }
+                }).then(() => {
+                    Swal.fire('Berhasil!', 'Tugas kamu sudah diterima Guru.', 'success');
+                });
+            }
         });
     }
 
@@ -218,15 +282,13 @@
         document.getElementById(id).classList.add('active');
         document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
         document.querySelector(`[data-section="${id}"]`).classList.add('active');
-        const titles = { 'dash': 'Beranda', 'materi': 'Materi Saya', 'soal': 'Menu Soal', 'nilai': 'Papan Skor' };
+        const titles = { 'dash': 'Beranda', 'pengumuman': 'Pengumuman', 'materi': 'Materi Saya', 'soal': 'Menu Soal', 'tugas': 'Tugas Proyek', 'nilai': 'Papan Skor' };
         document.getElementById('pageTitle').innerText = titles[id];
+        window.scrollTo(0,0);
     }
 
     document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            showSection(this.getAttribute('data-section'));
-        });
+        link.addEventListener('click', function(e) { e.preventDefault(); showSection(this.getAttribute('data-section')); });
     });
 
     function prosesLogout() { location.reload(); }
