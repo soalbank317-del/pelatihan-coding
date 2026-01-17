@@ -3,262 +3,242 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Petualangan Berpikir Komputasional - MTs</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <title>LMS MTs Amtsilati - Berpikir Komputasional</title>
     
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
     <style>
         body {
             font-family: 'Quicksand', sans-serif;
-            background-color: #f0f9ff;
-            color: #333;
+            background-color: #f8f9fa;
         }
-        .navbar-custom {
-            background-color: #ff9800;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .hero-section {
-            background: linear-gradient(135deg, #ff9800, #ff5722);
-            color: white;
-            padding: 40px 0;
-            border-radius: 0 0 50px 50px;
-            margin-bottom: 30px;
-        }
-        .card {
-            border: none;
-            border-radius: 20px;
-            transition: transform 0.3s ease;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-        }
-        .card:hover {
-            transform: translateY(-10px);
-        }
-        .card-title {
-            color: #ff5722;
-            font-weight: 700;
-        }
-        .btn-check:checked + .btn-outline-primary {
-            background-color: #03a9f4;
+        .sidebar {
+            background: linear-gradient(180deg, #4e73df 10%, #224abe 100%);
+            min-height: 100vh;
             color: white;
         }
-        .quiz-box {
-            background-color: white;
-            padding: 25px;
-            border-radius: 20px;
-            margin-bottom: 20px;
-            border-left: 8px solid #03a9f4;
-        }
-        .result-box {
-            display: none;
-            background-color: #ffffff;
-            border: 3px dashed #4caf50;
-            border-radius: 25px;
-            padding: 30px;
-        }
-        #finalScore {
-            font-size: 60px;
-            font-weight: 700;
-            color: #4caf50;
-        }
+        .nav-link { color: rgba(255,255,255,0.8); border-radius: 10px; margin-bottom: 5px; }
+        .nav-link:hover, .nav-link.active { background: rgba(255,255,255,0.2); color: white; }
+        
+        .card-custom { border: none; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .bg-gradient-primary { background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); color: white; }
+        
+        .section-view { display: none; }
+        .section-view.active { display: block; animation: fadeIn 0.5s; }
+        
+        .progress { height: 10px; border-radius: 10px; }
+        .avatar-circle { width: 45px; height: 45px; background: #ddd; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
     </style>
 </head>
 <body>
 
-<div class="hero-section text-center">
-    <div class="container">
-        <h1 class="display-5 fw-bold">🌟 Petualangan Digital 🌟</h1>
-        <p class="lead">Belajar Berpikir Komputasional dengan Seru!</p>
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-3 col-lg-2 d-md-block sidebar collapse p-3">
+            <div class="text-center mb-4">
+                <h4 class="fw-bold"><i class="bi bi-mortarboard-fill"></i> SIS-LMS</h4>
+                <small>MTs Amtsilati</small>
+            </div>
+            <hr>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#" onclick="showSection('dashboard')">
+                        <i class="bi bi-speedometer2 me-2"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="showSection('materi')">
+                        <i class="bi bi-book me-2"></i> Materi Belajar
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="showSection('kuis')">
+                        <i class="bi bi-pencil-square me-2"></i> Kuis Interaktif
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="showSection('nilai')">
+                        <i class="bi bi-trophy me-2"></i> Papan Nilai
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 id="sectionTitle" class="fw-bold">Beranda</h2>
+                <div class="d-flex align-items-center">
+                    <div class="me-3 text-end">
+                        <div class="fw-bold" id="userNameDisplay">Siswa Tamu</div>
+                        <small class="text-muted">Kelas 7A</small>
+                    </div>
+                    <div class="avatar-circle bg-warning text-white">S</div>
+                </div>
+            </div>
+
+            <div id="dashboard" class="section-view active">
+                <div class="card bg-gradient-primary card-custom p-4 mb-4">
+                    <h3>Selamat Datang, Sobat Kreatif! 👋</h3>
+                    <p>Hari ini kita akan belajar tentang cara kerja otak komputer. Sudah siap?</p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card card-custom p-3">
+                            <h6 class="text-muted">Progres Belajar</h6>
+                            <h3 class="fw-bold text-primary">65%</h3>
+                            <div class="progress mt-2"><div class="progress-bar bg-success" style="width: 65%"></div></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-custom p-3">
+                            <h6 class="text-muted">Kuis Selesai</h6>
+                            <h3 class="fw-bold text-warning">2 / 4</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-custom p-3">
+                            <h6 class="text-muted">Poin Saya</h6>
+                            <h3 class="fw-bold text-danger">850</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="materi" class="section-view">
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="card card-custom h-100 p-3">
+                            <img src="https://img.freepik.com/free-vector/kids-studying-from-home-concept_23-2148505561.jpg" class="card-img-top rounded-4 mb-3" alt="Decomposition">
+                            <h5 class="fw-bold">1. Dekomposisi</h5>
+                            <p class="text-muted">Belajar memecah masalah besar jadi kepingan kecil yang mudah diatur.</p>
+                            <button class="btn btn-outline-primary rounded-pill w-100">Buka Materi <i class="bi bi-play-circle"></i></button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card card-custom h-100 p-3">
+                            <img src="https://img.freepik.com/free-vector/children-learning-online-concept_23-2148523316.jpg" class="card-img-top rounded-4 mb-3" alt="Algorithms">
+                            <h5 class="fw-bold">2. Algoritma</h5>
+                            <p class="text-muted">Menyusun langkah berurutan seperti resep memasak makanan lezat.</p>
+                            <button class="btn btn-outline-primary rounded-pill w-100">Buka Materi <i class="bi bi-play-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="kuis" class="section-view">
+                <div class="card card-custom p-4 shadow-sm border-start border-primary border-5">
+                    <h5 class="fw-bold mb-3">Tantangan Berpikir Komputasional #1</h5>
+                    <hr>
+                    <p class="fs-5">Jika kamu ingin membuat robot pembuat teh, langkah pertama adalah merebus air. Langkah ini disebut bagian dari...</p>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="q1" id="q1a" value="algoritma">
+                        <label class="form-check-label" for="q1a">Algoritma</label>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" name="q1" id="q1b" value="pola">
+                        <label class="form-check-label" for="q1b">Pengenalan Pola</label>
+                    </div>
+                    <button class="btn btn-primary rounded-pill px-4" onclick="cekKuis()">Kirim Jawaban</button>
+                </div>
+            </div>
+
+            <div id="nilai" class="section-view">
+                <div class="card card-custom p-4">
+                    <h5 class="fw-bold mb-3 text-center"><i class="bi bi-stars text-warning"></i> Peringkat Kelas 7A <i class="bi bi-stars text-warning"></i></h5>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Posisi</th>
+                                    <th>Nama Siswa</th>
+                                    <th>Skor</th>
+                                    <th>Lencana</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="badge bg-warning text-dark">1</span></td>
+                                    <td>Ahmad Fauzi</td>
+                                    <td>980</td>
+                                    <td>🥇 Master</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge bg-secondary">2</span></td>
+                                    <td>Siti Aminah</td>
+                                    <td>950</td>
+                                    <td>🥈 Hebat</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge bg-bronze" style="background: #cd7f32; color: white;">3</span></td>
+                                    <td>Zidni Ilman</td>
+                                    <td>890</td>
+                                    <td>🥉 Keren</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </main>
     </div>
 </div>
-
-<div class="container mb-5">
-    <div class="card p-4 mb-4">
-        <div class="row g-3">
-            <div class="col-md-4">
-                <label class="form-label fw-bold">Nama Lengkap</label>
-                <input type="text" id="studentName" class="form-control rounded-pill" placeholder="Masukkan namamu">
-            </div>
-            <div class="col-md-4">
-                <label class="form-label fw-bold">Pilih Kelas</label>
-                <select id="studentClass" class="form-select rounded-pill">
-                    <option selected disabled>Pilih Kelas...</option>
-                    <option>7A</option>
-                    <option>7B</option>
-                    <option>8A</option>
-                    <option>8B</option>
-                    <option>9A</option>
-                </select>
-            </div>
-            <div class="col-md-4">
-                <label class="form-label fw-bold">Mata Pelajaran</label>
-                <select id="subject" class="form-select rounded-pill">
-                    <option>Informatika</option>
-                    <option>Teknologi Informasi</option>
-                </select>
-            </div>
-        </div>
-    </div>
-
-    <h2 class="text-center mb-4 fw-bold" style="color: #ff5722;">🧩 Empat Pilar Hebat</h2>
-    <div class="row g-4 mb-5">
-        <div class="col-md-3">
-            <div class="card h-100 p-3">
-                <div class="card-body text-center">
-                    <h3>🧩</h3>
-                    <h5 class="card-title">Dekomposisi</h5>
-                    <p class="card-text small">Memecah masalah besar menjadi bagian-bagian kecil agar mudah dikerjakan.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card h-100 p-3">
-                <div class="card-body text-center">
-                    <h3>🎨</h3>
-                    <h5 class="card-title">Pola</h5>
-                    <p class="card-text small">Mencari kesamaan atau kemiripan di dalam masalah yang ada.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card h-100 p-3">
-                <div class="card-body text-center">
-                    <h3>🔍</h3>
-                    <h5 class="card-title">Abstraksi</h5>
-                    <p class="card-text small">Membuang bagian yang tidak penting dan fokus pada inti masalah.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card h-100 p-3">
-                <div class="card-body text-center">
-                    <h3>🪜</h3>
-                    <h5 class="card-title">Algoritma</h5>
-                    <p class="card-text small">Menyusun langkah-langkah secara berurutan untuk menyelesaikan tugas.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="quizContainer">
-        <h2 class="text-center mb-4 fw-bold" style="color: #03a9f4;">🎯 Mari Menguji Kemampuanmu!</h2>
-        
-        <div class="quiz-box shadow-sm">
-            <p class="fw-bold">1. Memecah tugas membersihkan rumah menjadi: menyapu, mengepel, dan cuci piring adalah contoh dari...</p>
-            <div class="btn-group-vertical w-100" role="group">
-                <input type="radio" class="btn-check" name="q1" id="q1a" value="benar">
-                <label class="btn btn-outline-primary rounded-pill mb-2 text-start" for="q1a">A. Dekomposisi</label>
-                
-                <input type="radio" class="btn-check" name="q1" id="q1b" value="salah">
-                <label class="btn btn-outline-primary rounded-pill mb-2 text-start" for="q1b">B. Abstraksi</label>
-                
-                <input type="radio" class="btn-check" name="q1" id="q1c" value="salah">
-                <label class="btn btn-outline-primary rounded-pill mb-2 text-start" for="q1c">C. Algoritma</label>
-            </div>
-        </div>
-
-        <div class="quiz-box shadow-sm">
-            <p class="fw-bold">2. Urutan langkah-langkah membuat mie instan (rebus air -> masukkan mie -> bumbu) disebut...</p>
-            <div class="btn-group-vertical w-100" role="group">
-                <input type="radio" class="btn-check" name="q2" id="q2a" value="salah">
-                <label class="btn btn-outline-primary rounded-pill mb-2 text-start" for="q2a">A. Pengenalan Pola</label>
-                
-                <input type="radio" class="btn-check" name="q2" id="q2b" value="benar">
-                <label class="btn btn-outline-primary rounded-pill mb-2 text-start" for="q2b">B. Algoritma</label>
-                
-                <input type="radio" class="btn-check" name="q2" id="q2c" value="salah">
-                <label class="btn btn-outline-primary rounded-pill mb-2 text-start" for="q2c">C. Dekomposisi</label>
-            </div>
-        </div>
-
-        <div class="quiz-box shadow-sm">
-            <p class="fw-bold">3. Saat menggambar kucing, kita fokus pada telinga dan kumisnya saja, mengabaikan warna ubin lantai. Ini disebut...</p>
-            <div class="btn-group-vertical w-100" role="group">
-                <input type="radio" class="btn-check" name="q3" id="q3a" value="salah">
-                <label class="btn btn-outline-primary rounded-pill mb-2 text-start" for="q3a">A. Pola</label>
-                
-                <input type="radio" class="btn-check" name="q3" id="q3b" value="salah">
-                <label class="btn btn-outline-primary rounded-pill mb-2 text-start" for="q3b">B. Dekomposisi</label>
-                
-                <input type="radio" class="btn-check" name="q3" id="q3c" value="benar">
-                <label class="btn btn-outline-primary rounded-pill mb-2 text-start" for="q3c">C. Abstraksi</label>
-            </div>
-        </div>
-
-        <div class="text-center mt-4">
-            <button class="btn btn-success btn-lg rounded-pill px-5 shadow" onclick="hitungSkor()">Selesai & Lihat Nilai 🎉</button>
-        </div>
-    </div>
-
-    <div id="resultBox" class="result-box text-center shadow">
-        <h2 class="fw-bold">HASIL AKHIR</h2>
-        <hr>
-        <div id="displayIdentity" class="mb-3 fs-5"></div>
-        <div class="mb-2">Nilai Kamu:</div>
-        <div id="finalScore">0</div>
-        <div id="resultMessage" class="fs-4 mb-4"></div>
-        <button class="btn btn-primary rounded-pill" onclick="location.reload()">Coba Lagi 🔄</button>
-    </div>
-</div>
-
-<footer class="text-center text-white py-4 mt-5" style="background-color: #ff9800;">
-    <p class="mb-0">💡 Berpikir Seperti Komputer, Belajar Menjadi Lebih Pintar! 💡</p>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-    function hitungSkor() {
-        const name = document.getElementById('studentName').value;
-        const sClass = document.getElementById('studentClass').value;
-        const subject = document.getElementById('subject').value;
+    // Fungsi pindah halaman (Tab)
+    function showSection(sectionId) {
+        // Hapus class active dari semua menu dan section
+        document.querySelectorAll('.section-view').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        
+        // Aktifkan section yang dipilih
+        document.getElementById(sectionId).classList.add('active');
+        
+        // Aktifkan link di sidebar
+        event.target.classList.add('active');
+        
+        // Ganti judul di topbar
+        const titles = { 'dashboard': 'Beranda', 'materi': 'Materi Belajar', 'kuis': 'Ujian Kuis', 'nilai': 'Papan Peringkat' };
+        document.getElementById('sectionTitle').textContent = titles[sectionId];
+    }
 
-        if (!name || sClass === "Pilih Kelas...") {
-            alert("Tolong isi Nama dan Kelas dulu ya! 😊");
-            return;
-        }
-
-        let score = 0;
+    function cekKuis() {
         const q1 = document.querySelector('input[name="q1"]:checked');
-        const q2 = document.querySelector('input[name="q2"]:checked');
-        const q3 = document.querySelector('input[name="q3"]:checked');
-
-        if (!q1 || !q2 || !q3) {
-            alert("Jawab semua soal kuisnya dulu ya sayang! 😊");
+        if (!q1) {
+            Swal.fire('Oops!', 'Pilih jawabannya dulu ya!', 'warning');
             return;
         }
-
-        // Hitung Skor (tiap soal poin 33.33)
-        if (q1.value === "benar") score += 33.33;
-        if (q2.value === "benar") score += 33.33;
-        if (q3.value === "benar") score += 33.34;
-
-        const finalScore = Math.round(score);
-
-        // Tampilkan Hasil
-        document.getElementById('quizContainer').style.display = 'none';
-        document.getElementById('resultBox').style.display = 'block';
         
-        document.getElementById('displayIdentity').innerHTML = `
-            <strong>Nama:</strong> ${name} <br>
-            <strong>Kelas:</strong> ${sClass} | <strong>Mapel:</strong> ${subject}
-        `;
-        
-        document.getElementById('finalScore').textContent = finalScore;
-
-        const msg = document.getElementById('resultMessage');
-        if (finalScore === 100) {
-            msg.innerHTML = "Wah, Kamu Hebat Sekali! 🏆 Sang Juara!";
-            msg.style.color = "#4caf50";
-        } else if (finalScore >= 60) {
-            msg.innerHTML = "Bagus! Kamu sudah mengerti materinya. 🌟";
-            msg.style.color = "#03a9f4";
+        if (q1.value === 'algoritma') {
+            Swal.fire({
+                title: 'Benar!',
+                text: 'Kamu memang calon programmer hebat!',
+                icon: 'success',
+                confirmButtonText: 'Lanjut!'
+            });
         } else {
-            msg.innerHTML = "Ayo belajar lagi, kamu pasti bisa! 💪";
-            msg.style.color = "#ff5722";
+            Swal.fire('Yah...', 'Coba baca materi Algoritma lagi yuk!', 'error');
         }
+    }
 
-        // Scroll ke atas
-        window.scrollTo(0,0);
+    // Simulasi Nama Pengguna
+    window.onload = () => {
+        Swal.fire({
+            title: 'Siapa namamu?',
+            input: 'text',
+            inputPlaceholder: 'Ketik nama lengkapmu...',
+            confirmButtonText: 'Masuk LMS',
+            allowOutsideClick: false
+        }).then((result) => {
+            if (result.value) {
+                document.getElementById('userNameDisplay').textContent = result.value;
+                Swal.fire(`Halo ${result.value}!`, 'Selamat datang di LMS Informatika.', 'success');
+            }
+        });
     }
 </script>
 
