@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Petualangan Berpikir Komputasional</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Comic Sans MS", "Arial Rounded MT Bold", Arial, sans-serif;
+      background: linear-gradient(135deg, #a1ffce, #faffd1);
+      color: #333;
+    }
+
+    header {
+      background: #ff9800;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .container {
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      text-align: center;
+      color: #ff5722;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card h3 {
+      color: #4caf50;
+      font-size: 22px;
+    }
+
+    .quiz {
+      margin-top: 40px;
+    }
+
+    .quiz-card {
+      background: white;
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 30px;
+      background: #03a9f4;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+      background: #0288d1;
+      transform: scale(1.1);
+    }
+
+    .feedback {
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #ff9800;
+      color: white;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  🌟 Petualangan Berpikir Komputasional 🌟
+</header>
+
+<div class="container">
+
+  <h2>Yuk Belajar dengan Cara Seru!</h2>
+
+  <div class="cards">
+    <div class="card">
+      <h3>🧩 Dekomposisi</h3>
+      <p>
+        Dekomposisi itu artinya <b>memecah masalah besar jadi kecil-kecil</b>.
+        Contohnya: membereskan mainan. Kita pisahkan mainan mobil, boneka, dan balok.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>🎨 Pengenalan Pola</h3>
+      <p>
+        Pengenalan pola artinya <b>mencari kesamaan</b>.
+        Contohnya: mengelompokkan baju putih dan baju berwarna.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>🔍 Abstraksi</h3>
+      <p>
+        Abstraksi artinya <b>memilih yang penting saja</b>.
+        Contohnya: saat membuat bekal, kita fokus makanan, bukan warna kotaknya.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>🪜 Algoritma</h3>
+      <p>
+        Algoritma adalah <b>langkah-langkah berurutan</b>.
+        Contohnya: bangun tidur → mandi → sarapan → berangkat sekolah.
+      </p>
+    </div>
+  </div>
+
+  <div class="quiz">
+    <h2>🎯 Kuis Seru!</h2>
+
+    <div class="quiz-card">
+      <p>1. Memisahkan mainan menjadi beberapa jenis disebut...</p>
+      <label><input type="radio" name="q1" value="salah"> Algoritma</label><br>
+      <label><input type="radio" name="q1" value="benar"> Dekomposisi</label><br>
+      <label><input type="radio" name="q1" value="salah"> Abstraksi</label><br>
+      <button onclick="cekJawaban('q1','f1')">Cek Jawaban</button>
+      <div id="f1" class="feedback"></div>
+    </div>
+
+    <div class="quiz-card">
+      <p>2. Mengelompokkan baju berdasarkan warna termasuk...</p>
+      <label><input type="radio" name="q2" value="benar"> Pengenalan Pola</label><br>
+      <label><input type="radio" name="q2" value="salah"> Dekomposisi</label><br>
+      <label><input type="radio" name="q2" value="salah"> Algoritma</label><br>
+      <button onclick="cekJawaban('q2','f2')">Cek Jawaban</button>
+      <div id="f2" class="feedback"></div>
+    </div>
+
+    <div class="quiz-card">
+      <p>3. Langkah-langkah membuat bekal sekolah disebut...</p>
+      <label><input type="radio" name="q3" value="salah"> Abstraksi</label><br>
+      <label><input type="radio" name="q3" value="benar"> Algoritma</label><br>
+      <label><input type="radio" name="q3" value="salah"> Pola</label><br>
+      <button onclick="cekJawaban('q3','f3')">Cek Jawaban</button>
+      <div id="f3" class="feedback"></div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  💡 Belajar itu Menyenangkan! 💡
+</footer>
+
+<script>
+  function cekJawaban(soal, feedbackId) {
+    const pilihan = document.querySelector(`input[name="${soal}"]:checked`);
+    const feedback = document.getElementById(feedbackId);
+
+    if (!pilihan) {
+      feedback.textContent = "Pilih jawaban dulu ya 😊";
+      feedback.style.color = "orange";
+      return;
+    }
+
+    if (pilihan.value === "benar") {
+      const pujian = ["Wah, Kamu Hebat! 🎉", "Keren Banget! 😍", "Luar Biasa! 🌟"];
+      feedback.textContent = pujian[Math.floor(Math.random() * pujian.length)];
+      feedback.style.color = "green";
+    } else {
+      const semangat = ["Yah, coba lagi ya! 💪", "Ayo fokus, kamu pasti bisa! 😊"];
+      feedback.textContent = semangat[Math.floor(Math.random() * semangat.length)];
+      feedback.style.color = "red";
+    }
+  }
+</script>
+
+</body>
+</html>
