@@ -22,13 +22,18 @@
         .btn-start { padding: 15px 40px; font-weight: bold; border-radius: 50px; font-size: 1.2rem; transition: 0.3s; }
 
         /* --- STYLE HALAMAN PRIVAT (DASHBOARD) --- */
-        #private-view { display: none; } /* Tersembunyi di awal */
+        #private-view { display: none; }
         .sidebar { background: linear-gradient(180deg, #4e73df 10%, #224abe 100%); min-height: 100vh; color: white; transition: 0.3s; }
         .nav-link { color: rgba(255,255,255,0.8); border-radius: 10px; margin-bottom: 5px; }
         .nav-link.active { background: rgba(255,255,255,0.2); color: white; }
         .card-custom { border: none; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; }
         .section-content { display: none; }
         .section-content.active { display: block; animation: fadeIn 0.5s; }
+
+        /* Quiz Styling */
+        .question-item { background: #fff; border-radius: 15px; padding: 20px; margin-bottom: 20px; border-left: 5px solid #4e73df; }
+        .options-list { list-style: none; padding-left: 0; }
+        .options-list li { margin-bottom: 10px; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
@@ -66,22 +71,12 @@
                 </div>
                 <hr>
                 <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#" data-section="dash"><i class="bi bi-grid-1x2-fill me-2"></i> Beranda</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-section="materi"><i class="bi bi-book-half me-2"></i> Materi Saya</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-section="soal"><i class="bi bi-pencil-square me-2"></i> Menu Soal</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-section="nilai"><i class="bi bi-award me-2"></i> Papan Skor</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link active" href="#" data-section="dash"><i class="bi bi-grid-1x2-fill me-2"></i> Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-section="materi"><i class="bi bi-book-half me-2"></i> Materi Saya</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-section="soal"><i class="bi bi-pencil-square me-2"></i> Menu Soal</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-section="nilai"><i class="bi bi-award me-2"></i> Papan Skor</a></li>
                 </ul>
-                <div class="mt-5 p-2">
-                    <button class="btn btn-danger w-100 rounded-pill" onclick="prosesLogout()">Keluar <i class="bi bi-box-arrow-right"></i></button>
-                </div>
+                <div class="mt-5 p-2"><button class="btn btn-danger w-100 rounded-pill" onclick="prosesLogout()">Keluar <i class="bi bi-box-arrow-right"></i></button></div>
             </nav>
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
@@ -95,11 +90,11 @@
                 <div id="dash" class="section-content active">
                     <div class="card border-0 bg-primary text-white p-4 rounded-4 shadow mb-4">
                         <h4>Ayo Lanjutkan Belajarmu! 🚀</h4>
-                        <p class="mb-0">Kamu terakhir belajar di modul **Dekomposisi**. Selesaikan hari ini untuk dapat lencana!</p>
+                        <p class="mb-0">Selesaikan kuis hari ini untuk mengasah logika berpikirmu.</p>
                     </div>
                     <div class="row g-4">
-                        <div class="col-md-6"><div class="card card-custom p-4"><h6>Materi Selesai</h6><h3>12 / 20</h3></div></div>
-                        <div class="col-md-6"><div class="card card-custom p-4"><h6>Peringkat Kamu</h6><h3>#4</h3></div></div>
+                        <div class="col-md-6"><div class="card card-custom p-4"><h6>Tugas Belum Selesai</h6><h3>1</h3></div></div>
+                        <div class="col-md-6"><div class="card card-custom p-4"><h6>Poin Pengalaman</h6><h3>450 XP</h3></div></div>
                     </div>
                 </div>
 
@@ -109,52 +104,45 @@
                 </div>
 
                 <div id="soal" class="section-content">
-                    <div class="card card-custom p-4 shadow-sm border-0 mb-4">
-                        <h5 class="fw-bold text-danger mb-3"><i class="bi bi-card-checklist me-2"></i> Daftar Latihan & Kuis</h5>
-                        <p class="text-muted small">Pilih salah satu soal di bawah ini untuk menguji pemahamanmu.</p>
-                        
-                        <div class="table-responsive mt-3">
-                            <table class="table table-hover align-middle">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th>Nama Kuis</th>
-                                        <th>Kategori</th>
-                                        <th>Status</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Kuis 1: Apa itu Dekomposisi?</td>
-                                        <td><span class="badge bg-light text-dark">Latihan</span></td>
-                                        <td><span class="badge bg-info text-dark">Tersedia</span></td>
-                                        <td><button class="btn btn-primary btn-sm rounded-pill px-3" onclick="Swal.fire('Mulai!', 'Soal Sedang Dimuat...', 'info')">Kerjakan</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Latihan 2: Mengenal Pola</td>
-                                        <td><span class="badge bg-light text-dark">Latihan</span></td>
-                                        <td><span class="badge bg-info text-dark">Tersedia</span></td>
-                                        <td><button class="btn btn-primary btn-sm rounded-pill px-3" onclick="Swal.fire('Mulai!', 'Soal Sedang Dimuat...', 'info')">Kerjakan</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ujian Bab: Algoritma</td>
-                                        <td><span class="badge bg-warning text-dark">Ujian</span></td>
-                                        <td><span class="badge bg-secondary">Terkunci</span></td>
-                                        <td><button class="btn btn-outline-secondary btn-sm rounded-pill px-3" disabled>Terkunci</button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                    <div id="quiz-list-view">
+                        <div class="card card-custom p-4 shadow-sm border-0 mb-4">
+                            <h5 class="fw-bold text-danger mb-3"><i class="bi bi-card-checklist me-2"></i> Daftar Latihan</h5>
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle">
+                                    <thead class="table-light">
+                                        <tr><th>Nama Kuis</th><th>Durasi</th><th>Aksi</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Latihan Dasar: Berpikir Komputasional</td>
+                                            <td>10 Menit</td>
+                                            <td><button class="btn btn-primary btn-sm rounded-pill px-4" onclick="mulaiKuis()">Kerjakan</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="quiz-form-view" style="display: none;">
+                        <div class="card card-custom p-4 shadow-sm border-0 mb-5">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5 class="fw-bold">Lembar Kerja Siswa</h5>
+                                <button class="btn btn-outline-secondary btn-sm" onclick="batalKuis()">Batal</button>
+                            </div>
+                            <div id="questions-container">
+                                </div>
+                            <div class="text-center mt-4">
+                                <button class="btn btn-success btn-lg rounded-pill px-5 shadow" onclick="selesaiKuis()">Kirim Semua Jawaban 🎉</button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div id="nilai" class="section-content">
                     <div class="card card-custom p-4">
-                        <h5 class="fw-bold">Leaderboard Kelas 7</h5>
-                        <ul class="list-group list-group-flush mt-3">
-                            <li class="list-group-item d-flex justify-content-between"><span>1. Ahmad</span> <b>980</b></li>
-                            <li class="list-group-item d-flex justify-content-between"><span>2. Siti</span> <b>950</b></li>
-                        </ul>
+                        <h5 class="fw-bold">Riwayat Nilai Terbaru</h5>
+                        <div id="score-history" class="text-muted text-center py-4">Belum ada riwayat pengerjaan.</div>
                     </div>
                 </div>
             </main>
@@ -163,16 +151,26 @@
 </div>
 
 <script>
-    // FUNGSI LOGIN (SIMULASI PERPINDAHAN PUBLIK KE PRIVAT)
+    // DATA 10 SOAL BERPIKIR KOMPUTASIONAL
+    const daftarSoal = [
+        { q: "Apa pilar berpikir komputasional yang artinya membagi masalah besar menjadi bagian-bagian kecil?", options: ["Algoritma", "Abstraksi", "Dekomposisi", "Pola"], a: 2 },
+        { q: "Langkah-langkah berurutan untuk menyelesaikan sebuah tugas disebut...", options: ["Algoritma", "Pola", "Abstraksi", "Koding"], a: 0 },
+        { q: "Melihat kesamaan antara masalah satu dengan lainnya adalah pilar...", options: ["Dekomposisi", "Pengenalan Pola", "Abstraksi", "Urutan"], a: 1 },
+        { q: "Fokus pada informasi yang penting saja dan mengabaikan detail yang tidak perlu disebut...", options: ["Pola", "Dekomposisi", "Algoritma", "Abstraksi"], a: 3 },
+        { q: "Saat membereskan kamar, kamu membagi tugas menjadi: merapikan kasur, menyapu lantai, dan menata meja. Ini adalah contoh...", options: ["Abstraksi", "Dekomposisi", "Pola", "Instruksi"], a: 1 },
+        { q: "Menentukan urutan langkah untuk membuat secangkir teh adalah penerapan...", options: ["Algoritma", "Abstraksi", "Pola", "Analisis"], a: 0 },
+        { q: "Mengelompokkan jenis-jenis hewan berdasarkan cara mereka bernapas termasuk...", options: ["Dekomposisi", "Abstraksi", "Pengenalan Pola", "Logika"], a: 2 },
+        { q: "Saat menggambar peta jalan, kita hanya menggambar jalan utamanya saja tanpa detail pohon atau lampu jalan. Ini disebut...", options: ["Algoritma", "Abstraksi", "Dekomposisi", "Sketsa"], a: 1 },
+        { q: "Dekomposisi membantu kita dalam...", options: ["Menghafal jawaban", "Mempersulit masalah", "Menghapus masalah", "Mempermudah penyelesaian masalah besar"], a: 3 },
+        { q: "Mengapa berpikir komputasional penting dipelajari?", options: ["Agar bisa main game terus", "Agar bisa berpikir logis dan sistematis", "Agar cepat menghafal", "Agar bisa memperbaiki laptop rusak"], a: 1 }
+    ];
+
+    // FUNGSI LOGIN
     function prosesLogin() {
         Swal.fire({
             title: 'Login Siswa',
-            html: `
-                <input type="text" id="swal-name" class="swal2-input" placeholder="Nama Lengkap">
-                <input type="password" id="swal-pass" class="swal2-input" placeholder="PIN/Password">
-            `,
+            html: `<input type="text" id="swal-name" class="swal2-input" placeholder="Nama Lengkap">`,
             confirmButtonText: 'Masuk Sekarang',
-            focusConfirm: false,
             preConfirm: () => {
                 const name = Swal.getPopup().querySelector('#swal-name').value;
                 if (!name) { Swal.showValidationMessage(`Tolong masukkan namamu`); }
@@ -180,54 +178,103 @@
             }
         }).then((result) => {
             if (result.isConfirmed) {
-                // Sembunyikan Publik, Tampilkan Privat
                 document.getElementById('public-view').style.display = 'none';
                 document.getElementById('private-view').style.display = 'block';
                 document.getElementById('studentName').innerText = result.value.name;
-                
-                Swal.fire('Berhasil!', `Selamat datang, ${result.value.name}`, 'success');
+                Swal.fire('Halo!', `Selamat datang, ${result.value.name}`, 'success');
             }
         });
     }
 
-    // FUNGSI LOGOUT (KEMBALI KE PUBLIK)
     function prosesLogout() {
-        Swal.fire({
-            title: 'Keluar?',
-            text: "Kamu harus login lagi nanti untuk melihat nilai.",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            confirmButtonText: 'Ya, Keluar'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.getElementById('private-view').style.display = 'none';
-                document.getElementById('public-view').style.display = 'block';
-            }
+        location.reload();
+    }
+
+    // FUNGSI KUIS
+    function mulaiKuis() {
+        document.getElementById('quiz-list-view').style.display = 'none';
+        document.getElementById('quiz-form-view').style.display = 'block';
+        const container = document.getElementById('questions-container');
+        container.innerHTML = "";
+
+        daftarSoal.forEach((item, index) => {
+            let optionsHtml = "";
+            item.options.forEach((opt, i) => {
+                optionsHtml += `
+                    <li>
+                        <label class="d-block border p-2 rounded" style="cursor:pointer">
+                            <input type="radio" name="soal${index}" value="${i}"> ${opt}
+                        </label>
+                    </li>`;
+            });
+
+            container.innerHTML += `
+                <div class="question-item">
+                    <p class="fw-bold mb-3">${index + 1}. ${item.q}</p>
+                    <ul class="options-list">${optionsHtml}</ul>
+                </div>`;
         });
     }
 
-    // NAVIGASI MENU PRIVAT
+    function batalKuis() {
+        document.getElementById('quiz-list-view').style.display = 'block';
+        document.getElementById('quiz-form-view').style.display = 'none';
+    }
+
+    function selesaiKuis() {
+        let benar = 0;
+        let dijawabSemua = true;
+
+        daftarSoal.forEach((item, index) => {
+            const selected = document.querySelector(`input[name="soal${index}"]:checked`);
+            if (selected) {
+                if (parseInt(selected.value) === item.a) {
+                    benar++;
+                }
+            } else {
+                dijawabSemua = false;
+            }
+        });
+
+        if (!dijawabSemua) {
+            Swal.fire('Oops!', 'Ada soal yang belum kamu jawab nih. Ayo cek lagi!', 'warning');
+            return;
+        }
+
+        // HITUNG NILAI
+        const skor = (benar / daftarSoal.length) * 100;
+
+        // POPUP NILAI MODERN
+        Swal.fire({
+            title: 'Hasil Pengerjaanmu',
+            html: `
+                <div class="mb-3">Nilai Akhir Kamu:</div>
+                <div class="display-1 fw-bold text-primary mb-3">${skor}</div>
+                <div class="text-muted">Kamu berhasil menjawab <b>${benar}</b> dari 10 soal dengan benar.</div>
+            `,
+            icon: skor >= 70 ? 'success' : 'info',
+            confirmButtonText: 'Kembali Ke Menu',
+            allowOutsideClick: false
+        }).then(() => {
+            batalKuis();
+            document.getElementById('score-history').innerHTML = `
+                <div class="alert alert-success">
+                    Kuis Dasar: Berpikir Komputasional - <b>Skor: ${skor}</b>
+                </div>
+            `;
+        });
+    }
+
+    // NAVIGASI MENU
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             const target = this.getAttribute('data-section');
-            
-            // Toggle active link
             document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
             this.classList.add('active');
-            
-            // Toggle section content
             document.querySelectorAll('.section-content').forEach(s => s.classList.remove('active'));
             document.getElementById(target).classList.add('active');
-            
-            // Update Title
-            const titles = { 
-                'dash': 'Beranda', 
-                'materi': 'Materi Belajar', 
-                'soal': 'Menu Soal', 
-                'nilai': 'Papan Skor' 
-            };
+            const titles = { 'dash': 'Beranda', 'materi': 'Materi Belajar', 'soal': 'Menu Soal', 'nilai': 'Papan Skor' };
             document.getElementById('pageTitle').innerText = titles[target];
         });
     });
